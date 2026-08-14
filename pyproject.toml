@@ -1,0 +1,18 @@
+[project]
+name = "introduction-to-neuroglancer"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "caveclient>=8.2.1",
+    "cloud-volume>=12.14.4",
+    "ipykernel>=7.3.0",
+    "ipywidgets>=8.1.8",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.11.1",
+    "nglui[full]>=4.7.4",
+    "ossify>=0.2.6",
+    "seaborn>=0.13.2",
+    "standard-transform==1.4.1",
+]
