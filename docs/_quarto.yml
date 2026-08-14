@@ -9,7 +9,15 @@ website:
         text: Home
       - href: module-1.ipynb
         text: Module 1
-    back-to-top-navigation: true
+    tools: 
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/AllenInstitute/Introduction_to_Neuroglancer
+          - text: Report a Bug
+            url:  https://github.com/AllenInstitute/Introduction_to_Neuroglancer/issues
+  back-to-top-navigation: true
+
 
 format:
   html:
