@@ -9,6 +9,8 @@ website:
         text: Home
       - href: module-1.ipynb
         text: Module 1
+      - href: module-2.ipynb
+        text: Module 2
     tools: 
       - icon: github
         menu:
@@ -27,6 +29,7 @@ format:
     css: styles.css
     toc: true
     link-external-newwindow: true
+    include-after-body: resources/answers-widget.html
 
 
 
