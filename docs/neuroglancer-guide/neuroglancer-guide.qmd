@@ -172,14 +172,19 @@ These actions work in the **2D image panels** (the left panel by default).
 :::
 :::
 
-## Moving through the volume
+## Controlling perspective and overlays
+
+These toggles change how the scene is displayed.
 
 ::: {.grid .mb-4}
 ::: {.g-col-12 .g-col-md-7}
 ![](media/text_2d_3d_slice_scroll.gif){fig-alt="Scrolling over the image panel moves between slices of the volume." fig-align="center"}
 :::
 ::: {.g-col-12 .g-col-md-5}
-**Move between slices** — mouse wheel, or {{< kbd , >}} / {{< kbd . >}}.
+**Add section overlay** — {{< kbd S >}} toggles to add the current section(s) from the 2D views to 3D.
+
+
+**Move through the section slices** — mouse wheel, or {{< kbd , >}} / {{< kbd . >}}.
 :::
 :::
 
@@ -191,6 +196,25 @@ These actions work in the **2D image panels** (the left panel by default).
 **Cycle panel layouts** — {{< kbd space >}}.
 :::
 :::
+
+::: {.grid .mb-4}
+::: {.g-col-12 .g-col-md-7}
+![](media/text_3d_ortho_projection.gif){fig-alt="Pressing O toggles between perspective and orthographic projection; a scale bar appears in the orthographic view." fig-align="center"}
+:::
+::: {.g-col-12 .g-col-md-5}
+**Toggle projection style** — {{< kbd O >}}. Switches between perspective and
+orthographic views. Orthographic equalizes depth, so a scale bar appears.
+:::
+:::
+
+## Visualization
+
+
+![](media/text_3d_recolor_segments.gif){fig-alt="Pressing L assigns a fresh random color to every visible segment." fig-align="center"}
+
+**Recolor all segments** — {{< kbd L >}}. Assigns a fresh random color to every
+segment, which can help when neighboring cells overlap.
+
 
 ## Toolbar & settings
 
@@ -227,17 +251,17 @@ The **Settings** (gear) panel controls display options for the whole viewer:
 | {{< kbd Ctrl-Scroll >}} | Zoom |
 | Mouse wheel | Move between slices |
 | {{< kbd , >}} / {{< kbd . >}} | Move between slices |
-| {{< kbd space >}} | Cycle panel layouts |
-| {{< kbd a >}} | Show / hide the colored axis lines |
-| {{< kbd s >}} | Show / hide the 2D slice in the 3D view |
-| {{< kbd l >}} | Recolor all segments globally |
-| {{< kbd o >}} | Switch between 3D orthographic and projection views |
-| {{< kbd z >}} | Snap to the nearest axis (also undoes a sheared 2D view) |
+| {{< kbd Space >}} | Cycle panel layouts |
+| {{< kbd A >}} | Show / hide the colored axis lines |
+| {{< kbd S >}} | Show / hide the 2D slice in the 3D view |
+| {{< kbd L >}} | Recolor all segments globally |
+| {{< kbd O >}} | Switch between 3D orthographic and projection views |
+| {{< kbd Z >}} | Snap to the nearest axis (also undoes a sheared 2D view) |
 
 : {.bordered tbl-colwidths="[35,65]"}
 
 ::: {.callout-tip}
-Pressing {{< kbd z >}} is handy if you have "sheared" the 2D view with
+Pressing {{< kbd Z >}} is handy if you have "sheared" the 2D view with
 {{< kbd Shift >}} + {{< kbd Left-Click >}} + drag and want to return to the
 original orientation.
 :::
