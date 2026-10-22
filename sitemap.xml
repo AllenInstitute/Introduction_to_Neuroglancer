@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://AllenInstitute.github.io/Introduction_to_Neuroglancer/neuroglancer-guide/neuroglancer-guide.html</loc>
+    <lastmod>2026-10-22T23:53:49.016Z</lastmod>
+  </url>
+  <url>
     <loc>https://AllenInstitute.github.io/Introduction_to_Neuroglancer/module-1.html</loc>
-    <lastmod>2026-08-14T01:41:25.220Z</lastmod>
+    <lastmod>2026-10-22T23:53:48.780Z</lastmod>
   </url>
   <url>
     <loc>https://AllenInstitute.github.io/Introduction_to_Neuroglancer/about.html</loc>
-    <lastmod>2026-08-14T01:41:25.219Z</lastmod>
+    <lastmod>2026-09-27T19:23:15.819Z</lastmod>
   </url>
   <url>
     <loc>https://AllenInstitute.github.io/Introduction_to_Neuroglancer/index.html</loc>
-    <lastmod>2026-08-14T01:41:25.220Z</lastmod>
+    <lastmod>2026-09-27T19:23:15.819Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AllenInstitute.github.io/Introduction_to_Neuroglancer/module-2.html</loc>
+    <lastmod>2026-10-22T15:30:02.352Z</lastmod>
   </url>
 </urlset>

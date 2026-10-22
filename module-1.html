@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -93,10 +96,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -156,6 +159,14 @@ div.csl-indent {
     <a class="nav-link active" href="./module-1.html" aria-current="page"> 
 <span class="menu-text">Module 1</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./module-2.html"> 
+<span class="menu-text">Module 2</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./neuroglancer-guide/neuroglancer-guide.html"> 
+<span class="menu-text">Neuroglancer Guide</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -198,6 +209,10 @@ div.csl-indent {
   <li><a href="#visualizing-neuroanatomy-direction-terms" id="toc-visualizing-neuroanatomy-direction-terms" class="nav-link" data-scroll-target="#visualizing-neuroanatomy-direction-terms">2. Visualizing Neuroanatomy Direction Terms</a></li>
   <li><a href="#layered-organization-of-visual-cortex" id="toc-layered-organization-of-visual-cortex" class="nav-link" data-scroll-target="#layered-organization-of-visual-cortex">3. Layered organization of visual cortex</a></li>
   <li><a href="#visualizing-the-flow-of-information-through-the-visual-cortex" id="toc-visualizing-the-flow-of-information-through-the-visual-cortex" class="nav-link" data-scroll-target="#visualizing-the-flow-of-information-through-the-visual-cortex">4. Visualizing the flow of information through the visual cortex</a></li>
+  </ul></li>
+  <li><a href="#visualizing-the-cortical-information-flow-through-color" id="toc-visualizing-the-cortical-information-flow-through-color" class="nav-link" data-scroll-target="#visualizing-the-cortical-information-flow-through-color">5. Visualizing the cortical information flow through color</a>
+  <ul class="collapse">
+  <li><a href="#sharing-your-neuroglancer-state" id="toc-sharing-your-neuroglancer-state" class="nav-link" data-scroll-target="#sharing-your-neuroglancer-state">Sharing your neuroglancer state</a></li>
   </ul></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   <li><a href="#works-cited" id="toc-works-cited" class="nav-link" data-scroll-target="#works-cited">Works Cited</a></li>
@@ -243,6 +258,9 @@ div.csl-indent {
 <li>Observe the organization of visual cortex neurons into regions, columns, and layers that carry visual information<br>
 </li>
 <li>Navigate a connectomics data set within the Neuroglancer platform</li>
+<li>Visualize neural data in 3D…in multiple different ways</li>
+<li>Organize neurons based on different projection patterns</li>
+<li>Create a visually appealing scene and share it with your colleagues</li>
 </ul>
 </section>
 <section id="background-and-introduction" class="level2">
@@ -599,7 +617,7 @@ Tip
 <tbody>
 <tr class="odd">
 <td><strong>Neuron Name</strong></td>
-<td><strong>Cell Body Layer</strong></td>
+<td><strong>Cell Body Layer</strong> {Layer 1;Layer 2/3;Layer 4;Layer 5;Layer 6}</td>
 </tr>
 <tr class="even">
 <td><code>864691135441796936</code></td>
@@ -663,10 +681,10 @@ Tip
 </div>
 <p>For the next section, you may want to reset your Neuroglancer window by clicking on the following link:</p>
 <blockquote class="blockquote">
-<p><a href="https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5142016942931968" class="uri">https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5142016942931968</a></p>
+<p><a href="https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5363576861097984" class="uri">https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5363576861097984</a></p>
 </blockquote>
 <p>We are now going to analyze the organization and connections of some cortical neurons. First, <kbd title="mac: Ctrl-Click, windows: Right-Click" aria-hidden="true" data-mac="Ctrl-Click" data-windows="Right-Click"></kbd><span class="visually-hidden"></span> on the <code>2minnie65_public layer</code> tab above the main viewing pane. Then, <kbd title="Left-Click" aria-hidden="true">Left-Click</kbd><span class="visually-hidden">Left-Click</span> on the Seg tab at the top of the right-hand settings panel. In the bottom left, you should see a list of neuron Segment ID numbers corresponding to each of the neuron models seen in the main viewing pane. You can change the visibility of each neuron with <kbd title="Left-Click" aria-hidden="true">Left-Click</kbd><span class="visually-hidden">Left-Click</span> on the eye icon next to each Segment ID. You can change the color of each neuron by clicking the color swatch to the right of each Segment ID.</p>
-<p>For this final bit of data collection, you are asked to identify the brain region and layer that each neuron’s cell body is in. You are also asked to determine where the axon of each neuron project to and what the function of that neuron probably is. In the image and table below, there is an example of how these data were collected for the 864691134988722810 neuron.</p>
+<p>For this final bit of data collection, you are asked to identify the cortical layer that each neuron’s cell body is in. You are also asked to determine where the axon of each neuron project to and what the function of that neuron probably is. In the image and table below, there is an example of how these data were collected for the 864691134988722810 neuron.</p>
 <p>In the image, every neuron except for 864691134988722810 was made invisible (Figure 8). This allows us to observe that the cell body of this neuron is located in Layer 2/3 of the V1 column. So, we have indicated Primary Visual Cortex and Layer 2/3 in the table. We can see that the axons of this neuron travel to the HVA column. This means that this is cortico-cortical projection neuron carrying information from one cortical area to another. We have entered this in the table as well.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -682,9 +700,8 @@ Tip
 <li>You may need to make some neurons not visible or change neuron colors in order to see what each neuron is doing</li>
 <li>Each neuron will either be in Primary visual cortex or a Higher-order visual area.</li>
 <li>Remember that the layer boundaries are described earlier in this document and that you are looking for the layer containing the cell body of the neuron.</li>
-<li>You may need to distinguish axons from dendrites. For most neurons in this group, the easiest way to do this is to look for spines that signify dendrites (Figure 9). Axons will generally be smooth, rather than spiny.</li>
+<li>You may need to distinguish axons from dendrites. For most neurons in this group, the easiest way to do this is to look for spines that signify dendrites (Figure 9). Axons will generally be smooth, rather than spiny. For inhibitory neurons, which may have smooth dendrites without spines, the axon can be identified by looking for the thinnest process projecting from the cell body.</li>
 <li>Neurons may target multiple areas. These include other columns as shown above. Other neurons may send axon branches into the white matter (below the most ventral layer boundary) or have branches that stay within the same column. For these cases, you could suggest that the neuron is targeting subcortical regions (for axons that enter the white matter) or local neurons (for neurons that branch within the same column).</li>
-<li>Neurons that send axons into other columns are cortico-cortical projection neurons. Neurons that send axons into subcortical regions can be proposed to be cortico-thalamic neurons. Neurons that branch locally can be proposed to be local interneurons.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -712,10 +729,10 @@ Tip
 <tbody>
 <tr class="odd">
 <td><strong>Neuron Name</strong></td>
-<td><strong>Brain Region</strong></td>
-<td><strong>Cell Body Layer</strong></td>
-<td><strong>Axon Target</strong></td>
-<td><strong>Proposed Function</strong></td>
+<td><strong>Brain Region</strong> {Primary visual cortex;Higher-order visual area}</td>
+<td><strong>Cell Body Layer</strong> {Layer 1;Layer 2/3;Layer 4;Layer 5;Layer 6}</td>
+<td><strong>Axon Target</strong> {White matter;Same column;Different column}</td>
+<td><strong>Proposed Function</strong> {Cortico-cortical projection;Subcortical projection;Local neuron}</td>
 </tr>
 <tr class="even">
 <td><code>864691134988722810</code></td>
@@ -739,21 +756,35 @@ Tip
 <td>&nbsp;</td>
 </tr>
 <tr class="odd">
-<td><code>864691135584074360</code></td>
+<td><code>864691135778290109</code></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="even">
-<td><code>864691135609594119</code></td>
+<td><code>864691135584074360</code></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="odd">
+<td><code>864691135609594119</code></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="even">
 <td><code>864691135753932237</code></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="odd">
+<td><code>864691135941829121</code></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -774,21 +805,21 @@ Tip
 <td>&nbsp;</td>
 </tr>
 <tr class="even">
-<td><code>864691136023889209</code></td>
+<td><code>864691136662432990</code></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="odd">
-<td><code>864691136134707851</code></td>
+<td><code>864691136023889209</code></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="even">
-<td><code>864691136662432990</code></td>
+<td><code>864691136134707851</code></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -797,6 +828,42 @@ Tip
 </tbody>
 </table>
 <p><br> <br></p>
+</section>
+</section>
+<section id="visualizing-the-cortical-information-flow-through-color" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-the-cortical-information-flow-through-color">5. Visualizing the cortical information flow through color</h2>
+<p>Now that you have organized neurons by their axonal projection patterns we will make a visual scene that illustrates these different patterns more obviously. You will notice that if you have too many neurons visible at once, the random colors can make it difficult to distinguish what is what. To change this, you will assign a color for each projection pattern (local, cortical-cortical, or cortical-subcortical) and manually recolor each neuron based on your custom color scheme.</p>
+<div class="grid">
+<div class="g-col-6">
+<p>To do this, take a look at the lower right-hand panel of your segmentation panel (this is where you see the segmentation IDs). Left-click the square to the right of each ID, you will see a color picking menu pop-up like the one shown below. You can adjust the color using the color scale, the color picker tool, or by inputting an exact RGB value. Once you click away from that pop-up the selected mesh will change color (Note: you may need to refresh the window to see that change but as long as the ID in the lower right has changed color, the alteration has taken effect)</p>
+</div>
+<div class="g-col-6">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/changing_color_manually.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 10. Changing Color</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="sharing-your-neuroglancer-state" class="level3">
+<h3 class="anchored" data-anchor-id="sharing-your-neuroglancer-state">Sharing your neuroglancer state</h3>
+<p>The URL in your browser is a <strong>stateful</strong> url, meaning everything about your neuroglancer view is encoded in that string of text. When you copy it and share it with another person, they see what you see.</p>
+<p>However, because the URL encodes everything it gets very long and cumbersome. Instead, we recommend you use the built in link-shortener. In the upper righthand menu, you will see the following icons:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/neuroglancer_icons_full_tab_share.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 11. Share the state via shortened url</figcaption>
+</figure>
+</div>
+<p>Click “Share.” This copies the URL to your clipboard, that you can paste anywhere else. You will see this looks like the neuroglancer link you clicked on at the start of this lesson:</p>
+<blockquote class="blockquote">
+<p><a href="https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6518965183447040" class="uri">https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6518965183447040</a></p>
+</blockquote>
+<div class="task">
+<p>Share the state from your neuroglancer link, where you have colored the cells according to their projection type.</p>
+</div>
+<div class="answer-box"><label class="answer-prompt" for="af-m1-share">Paste your Neuroglancer Share URL here</label><textarea id="af-m1-share" class="answer-field" data-answer-id="m1-share" rows="2" placeholder="Type your response here…"></textarea></div>
 </section>
 </section>
 <section id="additional-resources" class="level2">
@@ -818,6 +885,532 @@ Bekkers, John M. 2011. <span>“Pyramidal Neurons.”</span> <em>Current Biology
 The MICrONS Consortium, J. Alexander Bae, Mahaly Baptiste, et al. 2025. <span>“Functional Connectomics Spanning Multiple Areas of Mouse Visual Cortex.”</span> <em>Nature</em> 640 (8058): 435–47. <a href="https://doi.org/10.1038/s41586-025-08790-w">https://doi.org/10.1038/s41586-025-08790-w</a>.
 </div>
 </div></section></div></main> <!-- /main -->
+<!-- Client-side student answers (serverless): persists to localStorage and
+
+     offers a floating Download / Copy panel. Nothing leaves the browser.
+
+
+
+     Authoring forms handled:
+
+       1.  shortcode -> <textarea class="answer-field">
+
+       2. Write-in tables          -> blank <td> cells become inputs. No markup
+
+          change needed. A cell that holds an element (e.g. an icon image) is
+
+          never treated as a blank, so icon/reference tables are left intact.
+
+          A column becomes a DROPDOWN if its header/label cell
+
+          ends with a brace list of options, separated by ";" or "|", e.g.
+
+              **Cell Body Layer** {Layer 1;Layer 2/3;Layer 4;Layer 5;Layer 6}
+
+          (";" needs no escaping in a table cell; if you use "|", escape it as \|
+
+          in a .qmd — in an .ipynb prefer ";" to avoid JSON backslash escaping.)
+
+
+
+     Export (Download all / Copy this page) rebuilds each answer table as a
+
+     Markdown table with the student's entries filled in, so it maps 1:1 back to
+
+     what they saw on the page. Wired site-wide via include-after-body (HTML only). -->
+
+<div id="answers-panel" class="answers-panel no-print" hidden="">
+
+  <span class="answers-panel-label">My answers</span>
+
+  <button type="button" id="answers-download" class="answers-btn">⬇ Download all</button>
+
+  <button type="button" id="answers-copy" class="answers-btn">⧉ Copy this page</button>
+
+  <span id="answers-status" class="answers-status" aria-live="polite"></span>
+
+</div>
+
+<script>
+
+(function () {
+
+  "use strict";
+
+  var NS = "introng:";                   // value keys:  introng:<path>::<id>
+
+  var META = "introng:meta:";            // structure:   introng:meta:<path>
+
+  var pageKey = location.pathname;
+
+  var pageTitle = (document.title || pageKey)
+
+    .replace(/\s*[–—|-]\s*Introduction to Neuroglancer.*$/i, "").trim() || pageKey;
+
+
+
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function keyFor(id) { return NS + pageKey + "::" + id; }
+
+  function esc(s) { return String(s == null ? "" : s).replace(/\s+/g, " ").replace(/\|/g, "\\|").trim(); }
+
+
+
+  var fields = [];        // {el, id, prompt} — everything autosaved/restored
+
+  var liveTables = [];    // current page, DOM-resolved: {title, headers, rows:[[cell]]}
+
+  var liveTextareas = []; // current page: {el, prompt}
+
+
+
+  function wireSave(el, id, prompt) {
+
+    function save() { lsSet(keyFor(id), JSON.stringify({ v: el.value, p: prompt, page: pageKey, title: pageTitle })); }
+
+    el.addEventListener("input", save);
+
+    el.addEventListener("change", save);
+
+  }
+
+
+
+  // ---- 1. Textarea widgets from  ------------------------------
+
+  Array.prototype.slice.call(document.querySelectorAll(".answer-field")).forEach(function (el) {
+
+    var promptEl = el.previousElementSibling;
+
+    var prompt = promptEl ? promptEl.textContent.trim() : el.getAttribute("data-answer-id");
+
+    fields.push({ el: el, id: el.getAttribute("data-answer-id"), prompt: prompt });
+
+    liveTextareas.push({ el: el, prompt: prompt });
+
+  });
+
+
+
+  // ---- 2. Write-in tables ---------------------------------------------------
+
+  function nearestHeading(node) {
+
+    var cur = node;
+
+    while (cur && cur !== document.body) {
+
+      var sib = cur.previousElementSibling;
+
+      while (sib) {
+
+        if (/^H[1-6]$/.test(sib.tagName)) { return sib.textContent.trim(); }
+
+        var h = sib.querySelector && sib.querySelector("h1,h2,h3,h4,h5,h6");
+
+        if (h) { return h.textContent.trim(); }
+
+        sib = sib.previousElementSibling;
+
+      }
+
+      cur = cur.parentNode;
+
+    }
+
+    return "";
+
+  }
+
+
+
+  var main = document.querySelector("main") || document.body;
+
+  var tIdx = 0;
+
+  Array.prototype.slice.call(main.querySelectorAll("table")).forEach(function (table) {
+
+    var bodyRows = Array.prototype.slice.call(table.querySelectorAll("tbody tr"));
+
+    if (!bodyRows.length) { return; }
+
+    var hasBlank = bodyRows.some(function (tr) {
+
+      return Array.prototype.slice.call(tr.children).some(function (td) {
+
+        return td.tagName === "TD" && !td.textContent.trim() && !td.querySelector("*");
+
+      });
+
+    });
+
+    if (!hasBlank) { return; }                      // not an answer table
+
+
+
+    // Label row = real <thead> if it has text, else the first body row.
+
+    var headCells = Array.prototype.slice.call(table.querySelectorAll("thead th, thead td"));
+
+    var usedThead = headCells.map(function (c) { return c.textContent.trim(); }).join("") !== "";
+
+    var labelCells = usedThead ? headCells : Array.prototype.slice.call(bodyRows[0].children);
+
+    var dataRows = usedThead ? bodyRows : bodyRows.slice(1);
+
+
+
+    // Parse "{a;b;c}" (or "a|b|c") option lists out of each label cell; strip from display.
+
+    var colOptions = labelCells.map(function (cell) {
+
+      var m = /\{([^}]*)\}\s*$/.exec(cell.textContent);
+
+      if (!m) { return null; }
+
+      cell.innerHTML = cell.innerHTML.replace(/\s*\{[^}]*\}\s*$/, "");
+
+      return m[1].split(/[;|]/).map(function (s) { return s.trim(); }).filter(Boolean);
+
+    });
+
+    var headers = labelCells.map(function (c) { return c.textContent.trim(); });
+
+    var section = nearestHeading(table);
+
+    var myIdx = tIdx++;
+
+
+
+    var liveRows = [];
+
+    dataRows.forEach(function (tr, ri) {
+
+      var rowCells = [];
+
+      var rowLabel = tr.children[0] ? tr.children[0].textContent.trim() : "";
+
+      Array.prototype.slice.call(tr.children).forEach(function (td, ci) {
+
+        if (td.tagName !== "TD" || td.textContent.trim() || td.querySelector("*")) {
+
+          rowCells.push({ text: td.textContent.trim() });
+
+          return;
+
+        }
+
+        var id = "t" + myIdx + "r" + ri + "c" + ci;
+
+        var prompt = (section ? section + " — " : "") + (headers[ci] || "col " + (ci + 1)) +
+
+                     (rowLabel && ci > 0 ? " (" + rowLabel + ")" : "");
+
+        var el;
+
+        if (colOptions[ci]) {
+
+          el = document.createElement("select");
+
+          var blank = document.createElement("option");
+
+          blank.value = ""; blank.textContent = "—"; el.appendChild(blank);
+
+          colOptions[ci].forEach(function (o) {
+
+            var op = document.createElement("option"); op.value = o; op.textContent = o; el.appendChild(op);
+
+          });
+
+        } else {
+
+          el = document.createElement("input"); el.type = "text";
+
+        }
+
+        el.className = "answer-cell";
+
+        el.setAttribute("data-answer-id", id);
+
+        el.setAttribute("aria-label", prompt);
+
+        td.textContent = "";
+
+        td.appendChild(el);
+
+        fields.push({ el: el, id: id, prompt: prompt });
+
+        rowCells.push({ el: el });
+
+      });
+
+      liveRows.push(rowCells);
+
+    });
+
+    liveTables.push({ title: section, headers: headers, rows: liveRows });
+
+  });
+
+
+
+  var panel = document.getElementById("answers-panel");
+
+  if (!fields.length) { return; }
+
+  if (panel) { panel.hidden = false; }
+
+
+
+  // ---- restore saved values + wire autosave; write page structure to storage -
+
+  fields.forEach(function (f) {
+
+    var raw = lsGet(keyFor(f.id));
+
+    if (raw) {
+
+      try { var o = JSON.parse(raw); if (o && typeof o.v === "string") { f.el.value = o.v; } }
+
+      catch (e) { f.el.value = raw; }
+
+    }
+
+    wireSave(f.el, f.id, f.prompt);
+
+  });
+
+
+
+  // Serializable structure so "Download all" can rebuild tables for any visited page.
+
+  lsSet(META + pageKey, JSON.stringify({
+
+    title: pageTitle,
+
+    tables: liveTables.map(function (t) {
+
+      return {
+
+        title: t.title, headers: t.headers,
+
+        rows: t.rows.map(function (r) {
+
+          return r.map(function (c) { return c.el ? { i: c.el.getAttribute("data-answer-id") } : { s: c.text }; });
+
+        })
+
+      };
+
+    }),
+
+    textareas: liveTextareas.map(function (t) { return { id: t.el.getAttribute("data-answer-id"), prompt: t.prompt }; })
+
+  }));
+
+
+
+  // ---- export ----------------------------------------------------------------
+
+  function valFor(path, id) {
+
+    try { var r = lsGet(NS + path + "::" + id); if (!r) { return ""; } var o = JSON.parse(r); return (o && o.v) || ""; }
+
+    catch (e) { return ""; }
+
+  }
+
+  function tableMd(headers, rows) {                  // rows: array of resolved strings
+
+    var out = [];
+
+    out.push("| " + headers.map(esc).join(" | ") + " |");
+
+    out.push("|" + headers.map(function () { return " --- "; }).join("|") + "|");
+
+    rows.forEach(function (r) { out.push("| " + r.map(esc).join(" | ") + " |"); });
+
+    out.push("");
+
+    return out;
+
+  }
+
+  function heading(out, title, state) {              // print "### title" only when it changes
+
+    if (title && title !== state.last) { out.push("### " + title, ""); state.last = title; }
+
+  }
+
+
+
+  // Current page straight from the DOM (works even if storage is blocked).
+
+  function currentPageMd() {
+
+    var out = ["## " + pageTitle, ""], state = { last: "" };
+
+    liveTables.forEach(function (t) {
+
+      heading(out, t.title, state);
+
+      var rows = t.rows.map(function (r) { return r.map(function (c) { return c.el ? c.el.value : c.text; }); });
+
+      out = out.concat(tableMd(t.headers, rows));
+
+    });
+
+    liveTextareas.forEach(function (t) { if (t.el.value.trim()) { out.push("**" + t.prompt + "**", "", t.el.value, ""); } });
+
+    return out;
+
+  }
+
+
+
+  // Any page, rebuilt from its stored structure + values.
+
+  function storedPageMd(path, title) {
+
+    var m; try { m = JSON.parse(lsGet(META + path)); } catch (e) { m = null; }
+
+    var out = ["## " + title, ""], state = { last: "" };
+
+    if (!m) { return out; }
+
+    (m.tables || []).forEach(function (tb) {
+
+      heading(out, tb.title, state);
+
+      var rows = tb.rows.map(function (r) { return r.map(function (c) { return c.s != null ? c.s : valFor(path, c.i); }); });
+
+      out = out.concat(tableMd(tb.headers, rows));
+
+    });
+
+    (m.textareas || []).forEach(function (t) { var v = valFor(path, t.id); if (v && v.trim()) { out.push("**" + t.prompt + "**", "", v, ""); } });
+
+    return out;
+
+  }
+
+
+
+  function pagesWithData() {
+
+    var set = {};
+
+    try {
+
+      for (var i = 0; i < localStorage.length; i++) {
+
+        var k = localStorage.key(i);
+
+        if (k.indexOf(META) === 0 || k.indexOf(NS) !== 0) { continue; }
+
+        var rest = k.slice(NS.length), at = rest.indexOf("::");
+
+        if (at < 0) { continue; }
+
+        var o; try { o = JSON.parse(localStorage.getItem(k)); } catch (e) { continue; }
+
+        if (!o || !o.v || !o.v.trim()) { continue; }
+
+        set[rest.slice(0, at)] = o.title || rest.slice(0, at);
+
+      }
+
+    } catch (e) {}
+
+    return set;
+
+  }
+
+
+
+  function header() { return ["# Introduction to Neuroglancer — my answers", "", "_Exported " + new Date().toLocaleString() + "_", ""]; }
+
+
+
+  function downloadAllMd() {
+
+    var pages = pagesWithData(), paths = Object.keys(pages);
+
+    var out = header();
+
+    if (!paths.length) { return out.join("\n") + "\n\n(No answers recorded yet.)\n"; }
+
+    paths.sort().forEach(function (p) {
+
+      out = out.concat(p === pageKey ? currentPageMd() : storedPageMd(p, pages[p]));
+
+    });
+
+    return out.join("\n") + "\n";
+
+  }
+
+
+
+  function flash(msg) {
+
+    var s = document.getElementById("answers-status");
+
+    if (!s) { return; }
+
+    s.textContent = msg;
+
+    setTimeout(function () { s.textContent = ""; }, 2500);
+
+  }
+
+  function download(text) {
+
+    var blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+
+    a.href = url; a.download = "introduction-to-neuroglancer-answers-" + new Date().toISOString().slice(0, 10) + ".md";
+
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+
+  }
+
+
+
+  var dl = document.getElementById("answers-download");
+
+  if (dl) { dl.addEventListener("click", function () { download(downloadAllMd()); flash("Downloaded ✓"); }); }
+
+
+
+  var cp = document.getElementById("answers-copy");
+
+  if (cp) {
+
+    cp.addEventListener("click", function () {
+
+      var text = header().concat(currentPageMd()).join("\n") + "\n";
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+
+        navigator.clipboard.writeText(text).then(function () { flash("Copied this page ✓"); }, function () { flash("Copy failed — use Download"); });
+
+      } else { flash("Copy unsupported — use Download"); }
+
+    });
+
+  }
+
+})();
+
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -39,10 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -99,6 +102,14 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="./module-1.html"> 
 <span class="menu-text">Module 1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./module-2.html"> 
+<span class="menu-text">Module 2</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./neuroglancer-guide/neuroglancer-guide.html"> 
+<span class="menu-text">Neuroglancer Guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -157,6 +168,532 @@ ul.task-list li input[type="checkbox"] {
 
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<!-- Client-side student answers (serverless): persists to localStorage and
+
+     offers a floating Download / Copy panel. Nothing leaves the browser.
+
+
+
+     Authoring forms handled:
+
+       1.  shortcode -> <textarea class="answer-field">
+
+       2. Write-in tables          -> blank <td> cells become inputs. No markup
+
+          change needed. A cell that holds an element (e.g. an icon image) is
+
+          never treated as a blank, so icon/reference tables are left intact.
+
+          A column becomes a DROPDOWN if its header/label cell
+
+          ends with a brace list of options, separated by ";" or "|", e.g.
+
+              **Cell Body Layer** {Layer 1;Layer 2/3;Layer 4;Layer 5;Layer 6}
+
+          (";" needs no escaping in a table cell; if you use "|", escape it as \|
+
+          in a .qmd — in an .ipynb prefer ";" to avoid JSON backslash escaping.)
+
+
+
+     Export (Download all / Copy this page) rebuilds each answer table as a
+
+     Markdown table with the student's entries filled in, so it maps 1:1 back to
+
+     what they saw on the page. Wired site-wide via include-after-body (HTML only). -->
+
+<div id="answers-panel" class="answers-panel no-print" hidden="">
+
+  <span class="answers-panel-label">My answers</span>
+
+  <button type="button" id="answers-download" class="answers-btn">⬇ Download all</button>
+
+  <button type="button" id="answers-copy" class="answers-btn">⧉ Copy this page</button>
+
+  <span id="answers-status" class="answers-status" aria-live="polite"></span>
+
+</div>
+
+<script>
+
+(function () {
+
+  "use strict";
+
+  var NS = "introng:";                   // value keys:  introng:<path>::<id>
+
+  var META = "introng:meta:";            // structure:   introng:meta:<path>
+
+  var pageKey = location.pathname;
+
+  var pageTitle = (document.title || pageKey)
+
+    .replace(/\s*[–—|-]\s*Introduction to Neuroglancer.*$/i, "").trim() || pageKey;
+
+
+
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function keyFor(id) { return NS + pageKey + "::" + id; }
+
+  function esc(s) { return String(s == null ? "" : s).replace(/\s+/g, " ").replace(/\|/g, "\\|").trim(); }
+
+
+
+  var fields = [];        // {el, id, prompt} — everything autosaved/restored
+
+  var liveTables = [];    // current page, DOM-resolved: {title, headers, rows:[[cell]]}
+
+  var liveTextareas = []; // current page: {el, prompt}
+
+
+
+  function wireSave(el, id, prompt) {
+
+    function save() { lsSet(keyFor(id), JSON.stringify({ v: el.value, p: prompt, page: pageKey, title: pageTitle })); }
+
+    el.addEventListener("input", save);
+
+    el.addEventListener("change", save);
+
+  }
+
+
+
+  // ---- 1. Textarea widgets from  ------------------------------
+
+  Array.prototype.slice.call(document.querySelectorAll(".answer-field")).forEach(function (el) {
+
+    var promptEl = el.previousElementSibling;
+
+    var prompt = promptEl ? promptEl.textContent.trim() : el.getAttribute("data-answer-id");
+
+    fields.push({ el: el, id: el.getAttribute("data-answer-id"), prompt: prompt });
+
+    liveTextareas.push({ el: el, prompt: prompt });
+
+  });
+
+
+
+  // ---- 2. Write-in tables ---------------------------------------------------
+
+  function nearestHeading(node) {
+
+    var cur = node;
+
+    while (cur && cur !== document.body) {
+
+      var sib = cur.previousElementSibling;
+
+      while (sib) {
+
+        if (/^H[1-6]$/.test(sib.tagName)) { return sib.textContent.trim(); }
+
+        var h = sib.querySelector && sib.querySelector("h1,h2,h3,h4,h5,h6");
+
+        if (h) { return h.textContent.trim(); }
+
+        sib = sib.previousElementSibling;
+
+      }
+
+      cur = cur.parentNode;
+
+    }
+
+    return "";
+
+  }
+
+
+
+  var main = document.querySelector("main") || document.body;
+
+  var tIdx = 0;
+
+  Array.prototype.slice.call(main.querySelectorAll("table")).forEach(function (table) {
+
+    var bodyRows = Array.prototype.slice.call(table.querySelectorAll("tbody tr"));
+
+    if (!bodyRows.length) { return; }
+
+    var hasBlank = bodyRows.some(function (tr) {
+
+      return Array.prototype.slice.call(tr.children).some(function (td) {
+
+        return td.tagName === "TD" && !td.textContent.trim() && !td.querySelector("*");
+
+      });
+
+    });
+
+    if (!hasBlank) { return; }                      // not an answer table
+
+
+
+    // Label row = real <thead> if it has text, else the first body row.
+
+    var headCells = Array.prototype.slice.call(table.querySelectorAll("thead th, thead td"));
+
+    var usedThead = headCells.map(function (c) { return c.textContent.trim(); }).join("") !== "";
+
+    var labelCells = usedThead ? headCells : Array.prototype.slice.call(bodyRows[0].children);
+
+    var dataRows = usedThead ? bodyRows : bodyRows.slice(1);
+
+
+
+    // Parse "{a;b;c}" (or "a|b|c") option lists out of each label cell; strip from display.
+
+    var colOptions = labelCells.map(function (cell) {
+
+      var m = /\{([^}]*)\}\s*$/.exec(cell.textContent);
+
+      if (!m) { return null; }
+
+      cell.innerHTML = cell.innerHTML.replace(/\s*\{[^}]*\}\s*$/, "");
+
+      return m[1].split(/[;|]/).map(function (s) { return s.trim(); }).filter(Boolean);
+
+    });
+
+    var headers = labelCells.map(function (c) { return c.textContent.trim(); });
+
+    var section = nearestHeading(table);
+
+    var myIdx = tIdx++;
+
+
+
+    var liveRows = [];
+
+    dataRows.forEach(function (tr, ri) {
+
+      var rowCells = [];
+
+      var rowLabel = tr.children[0] ? tr.children[0].textContent.trim() : "";
+
+      Array.prototype.slice.call(tr.children).forEach(function (td, ci) {
+
+        if (td.tagName !== "TD" || td.textContent.trim() || td.querySelector("*")) {
+
+          rowCells.push({ text: td.textContent.trim() });
+
+          return;
+
+        }
+
+        var id = "t" + myIdx + "r" + ri + "c" + ci;
+
+        var prompt = (section ? section + " — " : "") + (headers[ci] || "col " + (ci + 1)) +
+
+                     (rowLabel && ci > 0 ? " (" + rowLabel + ")" : "");
+
+        var el;
+
+        if (colOptions[ci]) {
+
+          el = document.createElement("select");
+
+          var blank = document.createElement("option");
+
+          blank.value = ""; blank.textContent = "—"; el.appendChild(blank);
+
+          colOptions[ci].forEach(function (o) {
+
+            var op = document.createElement("option"); op.value = o; op.textContent = o; el.appendChild(op);
+
+          });
+
+        } else {
+
+          el = document.createElement("input"); el.type = "text";
+
+        }
+
+        el.className = "answer-cell";
+
+        el.setAttribute("data-answer-id", id);
+
+        el.setAttribute("aria-label", prompt);
+
+        td.textContent = "";
+
+        td.appendChild(el);
+
+        fields.push({ el: el, id: id, prompt: prompt });
+
+        rowCells.push({ el: el });
+
+      });
+
+      liveRows.push(rowCells);
+
+    });
+
+    liveTables.push({ title: section, headers: headers, rows: liveRows });
+
+  });
+
+
+
+  var panel = document.getElementById("answers-panel");
+
+  if (!fields.length) { return; }
+
+  if (panel) { panel.hidden = false; }
+
+
+
+  // ---- restore saved values + wire autosave; write page structure to storage -
+
+  fields.forEach(function (f) {
+
+    var raw = lsGet(keyFor(f.id));
+
+    if (raw) {
+
+      try { var o = JSON.parse(raw); if (o && typeof o.v === "string") { f.el.value = o.v; } }
+
+      catch (e) { f.el.value = raw; }
+
+    }
+
+    wireSave(f.el, f.id, f.prompt);
+
+  });
+
+
+
+  // Serializable structure so "Download all" can rebuild tables for any visited page.
+
+  lsSet(META + pageKey, JSON.stringify({
+
+    title: pageTitle,
+
+    tables: liveTables.map(function (t) {
+
+      return {
+
+        title: t.title, headers: t.headers,
+
+        rows: t.rows.map(function (r) {
+
+          return r.map(function (c) { return c.el ? { i: c.el.getAttribute("data-answer-id") } : { s: c.text }; });
+
+        })
+
+      };
+
+    }),
+
+    textareas: liveTextareas.map(function (t) { return { id: t.el.getAttribute("data-answer-id"), prompt: t.prompt }; })
+
+  }));
+
+
+
+  // ---- export ----------------------------------------------------------------
+
+  function valFor(path, id) {
+
+    try { var r = lsGet(NS + path + "::" + id); if (!r) { return ""; } var o = JSON.parse(r); return (o && o.v) || ""; }
+
+    catch (e) { return ""; }
+
+  }
+
+  function tableMd(headers, rows) {                  // rows: array of resolved strings
+
+    var out = [];
+
+    out.push("| " + headers.map(esc).join(" | ") + " |");
+
+    out.push("|" + headers.map(function () { return " --- "; }).join("|") + "|");
+
+    rows.forEach(function (r) { out.push("| " + r.map(esc).join(" | ") + " |"); });
+
+    out.push("");
+
+    return out;
+
+  }
+
+  function heading(out, title, state) {              // print "### title" only when it changes
+
+    if (title && title !== state.last) { out.push("### " + title, ""); state.last = title; }
+
+  }
+
+
+
+  // Current page straight from the DOM (works even if storage is blocked).
+
+  function currentPageMd() {
+
+    var out = ["## " + pageTitle, ""], state = { last: "" };
+
+    liveTables.forEach(function (t) {
+
+      heading(out, t.title, state);
+
+      var rows = t.rows.map(function (r) { return r.map(function (c) { return c.el ? c.el.value : c.text; }); });
+
+      out = out.concat(tableMd(t.headers, rows));
+
+    });
+
+    liveTextareas.forEach(function (t) { if (t.el.value.trim()) { out.push("**" + t.prompt + "**", "", t.el.value, ""); } });
+
+    return out;
+
+  }
+
+
+
+  // Any page, rebuilt from its stored structure + values.
+
+  function storedPageMd(path, title) {
+
+    var m; try { m = JSON.parse(lsGet(META + path)); } catch (e) { m = null; }
+
+    var out = ["## " + title, ""], state = { last: "" };
+
+    if (!m) { return out; }
+
+    (m.tables || []).forEach(function (tb) {
+
+      heading(out, tb.title, state);
+
+      var rows = tb.rows.map(function (r) { return r.map(function (c) { return c.s != null ? c.s : valFor(path, c.i); }); });
+
+      out = out.concat(tableMd(tb.headers, rows));
+
+    });
+
+    (m.textareas || []).forEach(function (t) { var v = valFor(path, t.id); if (v && v.trim()) { out.push("**" + t.prompt + "**", "", v, ""); } });
+
+    return out;
+
+  }
+
+
+
+  function pagesWithData() {
+
+    var set = {};
+
+    try {
+
+      for (var i = 0; i < localStorage.length; i++) {
+
+        var k = localStorage.key(i);
+
+        if (k.indexOf(META) === 0 || k.indexOf(NS) !== 0) { continue; }
+
+        var rest = k.slice(NS.length), at = rest.indexOf("::");
+
+        if (at < 0) { continue; }
+
+        var o; try { o = JSON.parse(localStorage.getItem(k)); } catch (e) { continue; }
+
+        if (!o || !o.v || !o.v.trim()) { continue; }
+
+        set[rest.slice(0, at)] = o.title || rest.slice(0, at);
+
+      }
+
+    } catch (e) {}
+
+    return set;
+
+  }
+
+
+
+  function header() { return ["# Introduction to Neuroglancer — my answers", "", "_Exported " + new Date().toLocaleString() + "_", ""]; }
+
+
+
+  function downloadAllMd() {
+
+    var pages = pagesWithData(), paths = Object.keys(pages);
+
+    var out = header();
+
+    if (!paths.length) { return out.join("\n") + "\n\n(No answers recorded yet.)\n"; }
+
+    paths.sort().forEach(function (p) {
+
+      out = out.concat(p === pageKey ? currentPageMd() : storedPageMd(p, pages[p]));
+
+    });
+
+    return out.join("\n") + "\n";
+
+  }
+
+
+
+  function flash(msg) {
+
+    var s = document.getElementById("answers-status");
+
+    if (!s) { return; }
+
+    s.textContent = msg;
+
+    setTimeout(function () { s.textContent = ""; }, 2500);
+
+  }
+
+  function download(text) {
+
+    var blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+
+    a.href = url; a.download = "introduction-to-neuroglancer-answers-" + new Date().toISOString().slice(0, 10) + ".md";
+
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+
+  }
+
+
+
+  var dl = document.getElementById("answers-download");
+
+  if (dl) { dl.addEventListener("click", function () { download(downloadAllMd()); flash("Downloaded ✓"); }); }
+
+
+
+  var cp = document.getElementById("answers-copy");
+
+  if (cp) {
+
+    cp.addEventListener("click", function () {
+
+      var text = header().concat(currentPageMd()).join("\n") + "\n";
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+
+        navigator.clipboard.writeText(text).then(function () { flash("Copied this page ✓"); }, function () { flash("Copy failed — use Download"); });
+
+      } else { flash("Copy unsupported — use Download"); }
+
+    });
+
+  }
+
+})();
+
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

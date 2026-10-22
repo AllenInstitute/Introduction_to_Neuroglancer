@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neuroglancer Guide – Introduction to Neuroglancer</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to Neuroglancer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../module-1.html"> 
+<span class="menu-text">Module 1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../module-2.html"> 
+<span class="menu-text">Module 2</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../neuroglancer-guide/neuroglancer-guide.html" aria-current="page"> 
+<span class="menu-text">Neuroglancer Guide</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/AllenInstitute/Introduction_to_Neuroglancer">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/AllenInstitute/Introduction_to_Neuroglancer/issues">
+            Report a Bug
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#the-neuroglancer-interface" id="toc-the-neuroglancer-interface" class="nav-link active" data-scroll-target="#the-neuroglancer-interface">The Neuroglancer interface</a></li>
+  <li><a href="#d-navigation" id="toc-d-navigation" class="nav-link" data-scroll-target="#d-navigation">3D navigation</a></li>
+  <li><a href="#d-navigation-1" id="toc-d-navigation-1" class="nav-link" data-scroll-target="#d-navigation-1">2D navigation</a></li>
+  <li><a href="#controlling-perspective-and-overlays" id="toc-controlling-perspective-and-overlays" class="nav-link" data-scroll-target="#controlling-perspective-and-overlays">Controlling perspective and overlays</a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
+  <li><a href="#toolbar-settings" id="toc-toolbar-settings" class="nav-link" data-scroll-target="#toolbar-settings">Toolbar &amp; settings</a></li>
+  <li><a href="#keyboard-shortcuts" id="toc-keyboard-shortcuts" class="nav-link" data-scroll-target="#keyboard-shortcuts">Keyboard shortcuts</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Neuroglancer Guide</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!--
+========================================================================
+Neuroglancer Guide  —  reusable tutorial page
+========================================================================
+This page is self-contained and designed to be copied into other tutorial
+repositories. To reuse it:
+
+  1. Copy this whole folder (neuroglancer-guide/) into the other project's
+     docs/ directory. It carries its own images in media/.
+  2. Add one line to that project's _quarto.yml navbar, e.g.:
+         - href: neuroglancer-guide/neuroglancer-guide.qmd
+           text: Neuroglancer Guide
+
+It uses only Quarto's built-in grid + kbd shortcode, so it needs no custom
+CSS and no project-specific extensions. The navigation animations have the
+instruction labelled directly on the gif; the note beside each one is a short
+caption with the key combination.
+========================================================================
+-->
+<p><a href="https://github.com/google/neuroglancer">Neuroglancer</a> is a browser-based viewer for large volumetric datasets. This guide is a quick visual reference for finding your way around the interface and navigating in both the 2D image panels and the 3D view. Each animation shows the action; the note beside it gives the key combination.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The exact toolbar and panels vary a little between deployments (for example <a href="https://spelunker.cave-explorer.org/">Spelunker</a>, the MICrONS viewer). The controls and shortcuts shown here work the same way across all of them.</p>
+</div>
+</div>
+<section id="the-neuroglancer-interface" class="level2">
+<h2 class="anchored" data-anchor-id="the-neuroglancer-interface">The Neuroglancer interface</h2>
+<p>When you open a Neuroglancer link you will see one or more <strong>panels</strong> showing the data, a row of <strong>layer tabs</strong> across the top, a <strong>coordinate readout</strong>, and a <strong>toolbar</strong> in the top-right corner (see <a href="#toolbar-settings">Toolbar &amp; settings</a> below).</p>
+<section id="layer-tabs" class="level3">
+<h3 class="anchored" data-anchor-id="layer-tabs">Layer tabs</h3>
+<p>The tabs across the top of the viewer are the <strong>layers</strong> — the separate pieces of data in the scene (for example an EM image layer and a segmentation layer).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/select_layer_tab.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="A layer tab showing the tooltip: click to hide, control+click to show side panel, drag to move, shift+drag to copy." width="520"></p>
+</figure>
+</div>
+<ul>
+<li><strong>Click</strong> a tab to turn that layer on or off.</li>
+<li><kbd title="Ctrl-Click" aria-hidden="true">Ctrl-Click</kbd><span class="visually-hidden">Ctrl-Click</span> a tab to open its side panel.</li>
+<li><strong>Drag</strong> a tab to reorder it, or <kbd title="Shift-Drag" aria-hidden="true">Shift-Drag</kbd><span class="visually-hidden">Shift-Drag</span> to copy it.</li>
+</ul>
+</section>
+<section id="coordinates" class="level3">
+<h3 class="anchored" data-anchor-id="coordinates">Coordinates</h3>
+<p>The coordinate readout shows the current position (in nanometers). Click it to paste in a coordinate, or click the copy icon to copy the current location.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/coordinates_icon_0.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="The coordinate readout showing x, y, and z positions with a copy button." width="420"></p>
+</figure>
+</div>
+</section>
+<section id="panel-layout" class="level3">
+<h3 class="anchored" data-anchor-id="panel-layout">Panel layout</h3>
+<p>Switch between layouts with the <kbd title="space" aria-hidden="true">space</kbd><span class="visually-hidden">space</span> key, or by clicking the box-in-box icon in the upper corner of any panel. You can choose a 1-panel, 2-panel, or 4-panel view.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/select_layout_boxes.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="The box-in-box layout toggle icons." width="140"></p>
+</figure>
+</div>
+<div class="grid">
+<div class="g-col-12 g-col-sm-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/select_layout_2panel.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Two-panel layout."></p>
+</figure>
+</div>
+<p><strong>2 panel</strong> — a 2D slice beside the 3D view.</p>
+</div>
+<div class="g-col-12 g-col-sm-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/select_layout_4panel.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Four-panel layout."></p>
+</figure>
+</div>
+<p><strong>4 panel</strong> — three 2D slices plus the 3D view.</p>
+</div>
+<div class="g-col-12 g-col-sm-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/select_layout_3d.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Single 3D panel layout."></p>
+</figure>
+</div>
+<p><strong>3D only</strong> — just the 3D view.</p>
+</div>
+</div>
+<p>The <strong>xy</strong> plane is in the plane of imaging and has the highest resolution; the default 2-panel view is <strong>xy-3d</strong>.</p>
+</section>
+</section>
+<section id="d-navigation" class="level2">
+<h2 class="anchored" data-anchor-id="d-navigation">3D navigation</h2>
+<p>These actions work in the <strong>3D panel</strong> (the right panel by default).</p>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_3d_left_click_drag.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Left click and drag rotates the 3D view around the centered point."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Rotate</strong> — <kbd title="Left-Click" aria-hidden="true">Left-Click</kbd><span class="visually-hidden">Left-Click</span> + drag.</p>
+</div>
+</div>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_3d_shift_click_pan.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Shift plus left click and drag pans the 3D view."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Pan</strong> — <kbd title="Shift" aria-hidden="true">Shift</kbd><span class="visually-hidden">Shift</span> + <kbd title="Left-Click" aria-hidden="true">Left-Click</kbd><span class="visually-hidden">Left-Click</span> + drag.</p>
+</div>
+</div>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_3d_scroll_zoom.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Hovering over the 3D panel and Ctrl plus scroll zooms."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Zoom</strong> — <kbd title="Ctrl-Scroll" aria-hidden="true">Ctrl-Scroll</kbd><span class="visually-hidden">Ctrl-Scroll</span>.</p>
+</div>
+</div>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_3d_right_click_jump.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Right clicking an object centers it in every panel."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Center in every panel</strong> — <kbd title="mac: Two-finger Click, windows: Right-Click" aria-hidden="true" data-mac="Two-finger Click" data-windows="Right-Click"></kbd><span class="visually-hidden"></span>.</p>
+</div>
+</div>
+</section>
+<section id="d-navigation-1" class="level2">
+<h2 class="anchored" data-anchor-id="d-navigation-1">2D navigation</h2>
+<p>These actions work in the <strong>2D image panels</strong> (the left panel by default).</p>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_2d_left_click_pan.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Click and drag pans the 2D EM image."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Pan</strong> — <kbd title="Left-Click" aria-hidden="true">Left-Click</kbd><span class="visually-hidden">Left-Click</span> + drag.</p>
+</div>
+</div>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_2d_scroll_zoom_1.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Hovering over the image panel and Ctrl plus scroll zooms."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Zoom</strong> — <kbd title="Ctrl-Scroll" aria-hidden="true">Ctrl-Scroll</kbd><span class="visually-hidden">Ctrl-Scroll</span>.</p>
+</div>
+</div>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_2d_select_deselect.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Double clicking a cell selects it; double clicking again deselects it."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Select / deselect a cell</strong> — <kbd title="Double-Click" aria-hidden="true">Double-Click</kbd><span class="visually-hidden">Double-Click</span>.</p>
+</div>
+</div>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_2d_right_click_jump.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Right clicking centers the clicked point in every panel."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Center in every panel</strong> — <kbd title="mac: Two-finger Click, windows: Right-Click" aria-hidden="true" data-mac="Two-finger Click" data-windows="Right-Click"></kbd><span class="visually-hidden"></span>.</p>
+</div>
+</div>
+</section>
+<section id="controlling-perspective-and-overlays" class="level2">
+<h2 class="anchored" data-anchor-id="controlling-perspective-and-overlays">Controlling perspective and overlays</h2>
+<p>These toggles change how the scene is displayed.</p>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_2d_3d_slice_scroll.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Scrolling over the image panel moves between slices of the volume."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Add section overlay</strong> — <kbd title="S" aria-hidden="true">S</kbd><span class="visually-hidden">S</span> toggles to add the current section(s) from the 2D views to 3D.</p>
+<p><strong>Move through the section slices</strong> — mouse wheel, or <kbd title="," aria-hidden="true">,</kbd><span class="visually-hidden">,</span> / <kbd title="." aria-hidden="true">.</kbd><span class="visually-hidden">.</span>.</p>
+</div>
+</div>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_2d_3d_space_panel_layout.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Pressing space cycles through the panel layouts."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Cycle panel layouts</strong> — <kbd title="space" aria-hidden="true">space</kbd><span class="visually-hidden">space</span>.</p>
+</div>
+</div>
+<div class="grid mb-4">
+<div class="g-col-12 g-col-md-7">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_3d_ortho_projection.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Pressing O toggles between perspective and orthographic projection; a scale bar appears in the orthographic view."></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-5">
+<p><strong>Toggle projection style</strong> — <kbd title="O" aria-hidden="true">O</kbd><span class="visually-hidden">O</span>. Switches between perspective and orthographic views. Orthographic equalizes depth, so a scale bar appears.</p>
+</div>
+</div>
+</section>
+<section id="visualization" class="level2">
+<h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/text_3d_recolor_segments.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Pressing L assigns a fresh random color to every visible segment."></p>
+</figure>
+</div>
+<p><strong>Recolor all segments</strong> — <kbd title="L" aria-hidden="true">L</kbd><span class="visually-hidden">L</span>. Assigns a fresh random color to every segment, which can help when neighboring cells overlap.</p>
+</section>
+<section id="toolbar-settings" class="level2">
+<h2 class="anchored" data-anchor-id="toolbar-settings">Toolbar &amp; settings</h2>
+<p>The toolbar in the upper-right corner opens the side panels and tools:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/icons_full_tab.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="The Neuroglancer top-right toolbar with Share, Layers, Selection, Controls, JSON, Help, and Settings icons."></p>
+</figure>
+</div>
+<table class="table-bordered caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 18%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Icon</th>
+<th style="text-align: left;">Opens</th>
+<th style="text-align: left;">What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="media/icons_share.png" class="img-fluid" alt="Share" width="50"></td>
+<td style="text-align: left;"><strong>Share</strong></td>
+<td style="text-align: left;">Creates a shareable, <strong>shortened link</strong> that captures your current view, visible segments, and annotations.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="media/icons_palette.png" class="img-fluid" alt="Wrench" width="30"></td>
+<td style="text-align: left;"><strong>Palette</strong></td>
+<td style="text-align: left;">Shows the tool palette list (includes default Shader Controls).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="media/icons_layers.png" class="img-fluid" alt="Layers" width="30"></td>
+<td style="text-align: left;"><strong>Layers</strong></td>
+<td style="text-align: left;">Shows the list of data layers (images, segmentations, annotations).</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="media/icons_details.png" class="img-fluid" alt="Bullet List" width="30"></td>
+<td style="text-align: left;"><strong>Details</strong></td>
+<td style="text-align: left;">Shows details submenu for whatever you have selected.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="media/icons_menu.png" class="img-fluid" alt="Sliders" width="30"></td>
+<td style="text-align: left;"><strong>Controls</strong></td>
+<td style="text-align: left;">Opens layer side panel, controls for the active layer (color, opacity, shaders).</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="media/icons_json.png" class="img-fluid" alt="Curly brackets" width="30"></td>
+<td style="text-align: left;"><strong>JSON</strong></td>
+<td style="text-align: left;">Opens the raw JSON state — the full, editable definition of the scene.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="media/icons_screenshot.png" class="img-fluid" alt="Camera" width="30"></td>
+<td style="text-align: left;"><strong>Screenshot</strong></td>
+<td style="text-align: left;">Opens the built in screenshot tool.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="media/icons_clipboard.png" class="img-fluid" alt="Clipboard" width="30"></td>
+<td style="text-align: left;"><strong>Copy URL</strong></td>
+<td style="text-align: left;">Copy the full URL to the clipboard.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="media/icons_shortcuts.png" class="img-fluid" alt="Question Mark" width="30"></td>
+<td style="text-align: left;"><strong>Shortcuts</strong></td>
+<td style="text-align: left;">Lists every keyboard and mouse binding.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="media/icons_settings.png" class="img-fluid" alt="Gear" width="30"></td>
+<td style="text-align: left;"><strong>Settings</strong></td>
+<td style="text-align: left;">Global settings (axis lines, scale bar, memory limits, backgrounds).</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>Settings</strong> (gear) panel controls display options for the whole viewer:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/controls_side_menu.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="The Neuroglancer Settings side panel with options such as Show axis lines and Show scale bar." width="360"></p>
+</figure>
+</div>
+</section>
+<section id="keyboard-shortcuts" class="level2">
+<h2 class="anchored" data-anchor-id="keyboard-shortcuts">Keyboard shortcuts</h2>
+<table class="table-bordered caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Key</th>
+<th style="text-align: left;">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><kbd title="Left-Click" aria-hidden="true">Left-Click</kbd><span class="visually-hidden">Left-Click</span> + drag</td>
+<td style="text-align: left;">Rotate (3D) / pan (2D)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><kbd title="Shift" aria-hidden="true">Shift</kbd><span class="visually-hidden">Shift</span> + <kbd title="Left-Click" aria-hidden="true">Left-Click</kbd><span class="visually-hidden">Left-Click</span> + drag</td>
+<td style="text-align: left;">Pan (3D)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p><kbd title="mac: Two-finger Click, windows: Right-Click" aria-hidden="true" data-mac="Two-finger Click" data-windows="Right-Click"></kbd><span class="visually-hidden"></span></p></td>
+<td style="text-align: left;">Center the clicked point in every panel</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><kbd title="Ctrl-Scroll" aria-hidden="true">Ctrl-Scroll</kbd><span class="visually-hidden">Ctrl-Scroll</span></p></td>
+<td style="text-align: left;">Zoom</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Mouse wheel</td>
+<td style="text-align: left;">Move between slices</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><kbd title="," aria-hidden="true">,</kbd><span class="visually-hidden">,</span> / <kbd title="." aria-hidden="true">.</kbd><span class="visually-hidden">.</span></td>
+<td style="text-align: left;">Move between slices</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p><kbd title="Space" aria-hidden="true">Space</kbd><span class="visually-hidden">Space</span></p></td>
+<td style="text-align: left;">Cycle panel layouts</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><kbd title="A" aria-hidden="true">A</kbd><span class="visually-hidden">A</span></p></td>
+<td style="text-align: left;">Show / hide the colored axis lines</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p><kbd title="S" aria-hidden="true">S</kbd><span class="visually-hidden">S</span></p></td>
+<td style="text-align: left;">Show / hide the 2D slice in the 3D view</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><kbd title="L" aria-hidden="true">L</kbd><span class="visually-hidden">L</span></p></td>
+<td style="text-align: left;">Recolor all segments globally</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p><kbd title="O" aria-hidden="true">O</kbd><span class="visually-hidden">O</span></p></td>
+<td style="text-align: left;">Switch between 3D orthographic and projection views</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><kbd title="Z" aria-hidden="true">Z</kbd><span class="visually-hidden">Z</span></p></td>
+<td style="text-align: left;">Snap to the nearest axis (also undoes a sheared 2D view)</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pressing <kbd title="Z" aria-hidden="true">Z</kbd><span class="visually-hidden">Z</span> is handy if you have “sheared” the 2D view with <kbd title="Shift" aria-hidden="true">Shift</kbd><span class="visually-hidden">Shift</span> + <kbd title="Left-Click" aria-hidden="true">Left-Click</kbd><span class="visually-hidden">Left-Click</span> + drag and want to return to the original orientation.</p>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<!-- Client-side student answers (serverless): persists to localStorage and
+
+     offers a floating Download / Copy panel. Nothing leaves the browser.
+
+
+
+     Authoring forms handled:
+
+       1.  shortcode -> <textarea class="answer-field">
+
+       2. Write-in tables          -> blank <td> cells become inputs. No markup
+
+          change needed. A cell that holds an element (e.g. an icon image) is
+
+          never treated as a blank, so icon/reference tables are left intact.
+
+          A column becomes a DROPDOWN if its header/label cell
+
+          ends with a brace list of options, separated by ";" or "|", e.g.
+
+              **Cell Body Layer** {Layer 1;Layer 2/3;Layer 4;Layer 5;Layer 6}
+
+          (";" needs no escaping in a table cell; if you use "|", escape it as \|
+
+          in a .qmd — in an .ipynb prefer ";" to avoid JSON backslash escaping.)
+
+
+
+     Export (Download all / Copy this page) rebuilds each answer table as a
+
+     Markdown table with the student's entries filled in, so it maps 1:1 back to
+
+     what they saw on the page. Wired site-wide via include-after-body (HTML only). -->
+
+<div id="answers-panel" class="answers-panel no-print" hidden="">
+
+  <span class="answers-panel-label">My answers</span>
+
+  <button type="button" id="answers-download" class="answers-btn">⬇ Download all</button>
+
+  <button type="button" id="answers-copy" class="answers-btn">⧉ Copy this page</button>
+
+  <span id="answers-status" class="answers-status" aria-live="polite"></span>
+
+</div>
+
+<script>
+
+(function () {
+
+  "use strict";
+
+  var NS = "introng:";                   // value keys:  introng:<path>::<id>
+
+  var META = "introng:meta:";            // structure:   introng:meta:<path>
+
+  var pageKey = location.pathname;
+
+  var pageTitle = (document.title || pageKey)
+
+    .replace(/\s*[–—|-]\s*Introduction to Neuroglancer.*$/i, "").trim() || pageKey;
+
+
+
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function keyFor(id) { return NS + pageKey + "::" + id; }
+
+  function esc(s) { return String(s == null ? "" : s).replace(/\s+/g, " ").replace(/\|/g, "\\|").trim(); }
+
+
+
+  var fields = [];        // {el, id, prompt} — everything autosaved/restored
+
+  var liveTables = [];    // current page, DOM-resolved: {title, headers, rows:[[cell]]}
+
+  var liveTextareas = []; // current page: {el, prompt}
+
+
+
+  function wireSave(el, id, prompt) {
+
+    function save() { lsSet(keyFor(id), JSON.stringify({ v: el.value, p: prompt, page: pageKey, title: pageTitle })); }
+
+    el.addEventListener("input", save);
+
+    el.addEventListener("change", save);
+
+  }
+
+
+
+  // ---- 1. Textarea widgets from  ------------------------------
+
+  Array.prototype.slice.call(document.querySelectorAll(".answer-field")).forEach(function (el) {
+
+    var promptEl = el.previousElementSibling;
+
+    var prompt = promptEl ? promptEl.textContent.trim() : el.getAttribute("data-answer-id");
+
+    fields.push({ el: el, id: el.getAttribute("data-answer-id"), prompt: prompt });
+
+    liveTextareas.push({ el: el, prompt: prompt });
+
+  });
+
+
+
+  // ---- 2. Write-in tables ---------------------------------------------------
+
+  function nearestHeading(node) {
+
+    var cur = node;
+
+    while (cur && cur !== document.body) {
+
+      var sib = cur.previousElementSibling;
+
+      while (sib) {
+
+        if (/^H[1-6]$/.test(sib.tagName)) { return sib.textContent.trim(); }
+
+        var h = sib.querySelector && sib.querySelector("h1,h2,h3,h4,h5,h6");
+
+        if (h) { return h.textContent.trim(); }
+
+        sib = sib.previousElementSibling;
+
+      }
+
+      cur = cur.parentNode;
+
+    }
+
+    return "";
+
+  }
+
+
+
+  var main = document.querySelector("main") || document.body;
+
+  var tIdx = 0;
+
+  Array.prototype.slice.call(main.querySelectorAll("table")).forEach(function (table) {
+
+    var bodyRows = Array.prototype.slice.call(table.querySelectorAll("tbody tr"));
+
+    if (!bodyRows.length) { return; }
+
+    var hasBlank = bodyRows.some(function (tr) {
+
+      return Array.prototype.slice.call(tr.children).some(function (td) {
+
+        return td.tagName === "TD" && !td.textContent.trim() && !td.querySelector("*");
+
+      });
+
+    });
+
+    if (!hasBlank) { return; }                      // not an answer table
+
+
+
+    // Label row = real <thead> if it has text, else the first body row.
+
+    var headCells = Array.prototype.slice.call(table.querySelectorAll("thead th, thead td"));
+
+    var usedThead = headCells.map(function (c) { return c.textContent.trim(); }).join("") !== "";
+
+    var labelCells = usedThead ? headCells : Array.prototype.slice.call(bodyRows[0].children);
+
+    var dataRows = usedThead ? bodyRows : bodyRows.slice(1);
+
+
+
+    // Parse "{a;b;c}" (or "a|b|c") option lists out of each label cell; strip from display.
+
+    var colOptions = labelCells.map(function (cell) {
+
+      var m = /\{([^}]*)\}\s*$/.exec(cell.textContent);
+
+      if (!m) { return null; }
+
+      cell.innerHTML = cell.innerHTML.replace(/\s*\{[^}]*\}\s*$/, "");
+
+      return m[1].split(/[;|]/).map(function (s) { return s.trim(); }).filter(Boolean);
+
+    });
+
+    var headers = labelCells.map(function (c) { return c.textContent.trim(); });
+
+    var section = nearestHeading(table);
+
+    var myIdx = tIdx++;
+
+
+
+    var liveRows = [];
+
+    dataRows.forEach(function (tr, ri) {
+
+      var rowCells = [];
+
+      var rowLabel = tr.children[0] ? tr.children[0].textContent.trim() : "";
+
+      Array.prototype.slice.call(tr.children).forEach(function (td, ci) {
+
+        if (td.tagName !== "TD" || td.textContent.trim() || td.querySelector("*")) {
+
+          rowCells.push({ text: td.textContent.trim() });
+
+          return;
+
+        }
+
+        var id = "t" + myIdx + "r" + ri + "c" + ci;
+
+        var prompt = (section ? section + " — " : "") + (headers[ci] || "col " + (ci + 1)) +
+
+                     (rowLabel && ci > 0 ? " (" + rowLabel + ")" : "");
+
+        var el;
+
+        if (colOptions[ci]) {
+
+          el = document.createElement("select");
+
+          var blank = document.createElement("option");
+
+          blank.value = ""; blank.textContent = "—"; el.appendChild(blank);
+
+          colOptions[ci].forEach(function (o) {
+
+            var op = document.createElement("option"); op.value = o; op.textContent = o; el.appendChild(op);
+
+          });
+
+        } else {
+
+          el = document.createElement("input"); el.type = "text";
+
+        }
+
+        el.className = "answer-cell";
+
+        el.setAttribute("data-answer-id", id);
+
+        el.setAttribute("aria-label", prompt);
+
+        td.textContent = "";
+
+        td.appendChild(el);
+
+        fields.push({ el: el, id: id, prompt: prompt });
+
+        rowCells.push({ el: el });
+
+      });
+
+      liveRows.push(rowCells);
+
+    });
+
+    liveTables.push({ title: section, headers: headers, rows: liveRows });
+
+  });
+
+
+
+  var panel = document.getElementById("answers-panel");
+
+  if (!fields.length) { return; }
+
+  if (panel) { panel.hidden = false; }
+
+
+
+  // ---- restore saved values + wire autosave; write page structure to storage -
+
+  fields.forEach(function (f) {
+
+    var raw = lsGet(keyFor(f.id));
+
+    if (raw) {
+
+      try { var o = JSON.parse(raw); if (o && typeof o.v === "string") { f.el.value = o.v; } }
+
+      catch (e) { f.el.value = raw; }
+
+    }
+
+    wireSave(f.el, f.id, f.prompt);
+
+  });
+
+
+
+  // Serializable structure so "Download all" can rebuild tables for any visited page.
+
+  lsSet(META + pageKey, JSON.stringify({
+
+    title: pageTitle,
+
+    tables: liveTables.map(function (t) {
+
+      return {
+
+        title: t.title, headers: t.headers,
+
+        rows: t.rows.map(function (r) {
+
+          return r.map(function (c) { return c.el ? { i: c.el.getAttribute("data-answer-id") } : { s: c.text }; });
+
+        })
+
+      };
+
+    }),
+
+    textareas: liveTextareas.map(function (t) { return { id: t.el.getAttribute("data-answer-id"), prompt: t.prompt }; })
+
+  }));
+
+
+
+  // ---- export ----------------------------------------------------------------
+
+  function valFor(path, id) {
+
+    try { var r = lsGet(NS + path + "::" + id); if (!r) { return ""; } var o = JSON.parse(r); return (o && o.v) || ""; }
+
+    catch (e) { return ""; }
+
+  }
+
+  function tableMd(headers, rows) {                  // rows: array of resolved strings
+
+    var out = [];
+
+    out.push("| " + headers.map(esc).join(" | ") + " |");
+
+    out.push("|" + headers.map(function () { return " --- "; }).join("|") + "|");
+
+    rows.forEach(function (r) { out.push("| " + r.map(esc).join(" | ") + " |"); });
+
+    out.push("");
+
+    return out;
+
+  }
+
+  function heading(out, title, state) {              // print "### title" only when it changes
+
+    if (title && title !== state.last) { out.push("### " + title, ""); state.last = title; }
+
+  }
+
+
+
+  // Current page straight from the DOM (works even if storage is blocked).
+
+  function currentPageMd() {
+
+    var out = ["## " + pageTitle, ""], state = { last: "" };
+
+    liveTables.forEach(function (t) {
+
+      heading(out, t.title, state);
+
+      var rows = t.rows.map(function (r) { return r.map(function (c) { return c.el ? c.el.value : c.text; }); });
+
+      out = out.concat(tableMd(t.headers, rows));
+
+    });
+
+    liveTextareas.forEach(function (t) { if (t.el.value.trim()) { out.push("**" + t.prompt + "**", "", t.el.value, ""); } });
+
+    return out;
+
+  }
+
+
+
+  // Any page, rebuilt from its stored structure + values.
+
+  function storedPageMd(path, title) {
+
+    var m; try { m = JSON.parse(lsGet(META + path)); } catch (e) { m = null; }
+
+    var out = ["## " + title, ""], state = { last: "" };
+
+    if (!m) { return out; }
+
+    (m.tables || []).forEach(function (tb) {
+
+      heading(out, tb.title, state);
+
+      var rows = tb.rows.map(function (r) { return r.map(function (c) { return c.s != null ? c.s : valFor(path, c.i); }); });
+
+      out = out.concat(tableMd(tb.headers, rows));
+
+    });
+
+    (m.textareas || []).forEach(function (t) { var v = valFor(path, t.id); if (v && v.trim()) { out.push("**" + t.prompt + "**", "", v, ""); } });
+
+    return out;
+
+  }
+
+
+
+  function pagesWithData() {
+
+    var set = {};
+
+    try {
+
+      for (var i = 0; i < localStorage.length; i++) {
+
+        var k = localStorage.key(i);
+
+        if (k.indexOf(META) === 0 || k.indexOf(NS) !== 0) { continue; }
+
+        var rest = k.slice(NS.length), at = rest.indexOf("::");
+
+        if (at < 0) { continue; }
+
+        var o; try { o = JSON.parse(localStorage.getItem(k)); } catch (e) { continue; }
+
+        if (!o || !o.v || !o.v.trim()) { continue; }
+
+        set[rest.slice(0, at)] = o.title || rest.slice(0, at);
+
+      }
+
+    } catch (e) {}
+
+    return set;
+
+  }
+
+
+
+  function header() { return ["# Introduction to Neuroglancer — my answers", "", "_Exported " + new Date().toLocaleString() + "_", ""]; }
+
+
+
+  function downloadAllMd() {
+
+    var pages = pagesWithData(), paths = Object.keys(pages);
+
+    var out = header();
+
+    if (!paths.length) { return out.join("\n") + "\n\n(No answers recorded yet.)\n"; }
+
+    paths.sort().forEach(function (p) {
+
+      out = out.concat(p === pageKey ? currentPageMd() : storedPageMd(p, pages[p]));
+
+    });
+
+    return out.join("\n") + "\n";
+
+  }
+
+
+
+  function flash(msg) {
+
+    var s = document.getElementById("answers-status");
+
+    if (!s) { return; }
+
+    s.textContent = msg;
+
+    setTimeout(function () { s.textContent = ""; }, 2500);
+
+  }
+
+  function download(text) {
+
+    var blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+
+    a.href = url; a.download = "introduction-to-neuroglancer-answers-" + new Date().toISOString().slice(0, 10) + ".md";
+
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+
+  }
+
+
+
+  var dl = document.getElementById("answers-download");
+
+  if (dl) { dl.addEventListener("click", function () { download(downloadAllMd()); flash("Downloaded ✓"); }); }
+
+
+
+  var cp = document.getElementById("answers-copy");
+
+  if (cp) {
+
+    cp.addEventListener("click", function () {
+
+      var text = header().concat(currentPageMd()).join("\n") + "\n";
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+
+        navigator.clipboard.writeText(text).then(function () { flash("Copied this page ✓"); }, function () { flash("Copy failed — use Download"); });
+
+      } else { flash("Copy unsupported — use Download"); }
+
+    });
+
+  }
+
+})();
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/AllenInstitute\.github\.io\/Introduction_to_Neuroglancer\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
