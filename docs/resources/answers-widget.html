@@ -4,7 +4,9 @@
      Authoring forms handled:
        1. {{< answer >}} shortcode -> <textarea class="answer-field">
        2. Write-in tables          -> blank <td> cells become inputs. No markup
-          change needed. A column becomes a DROPDOWN if its header/label cell
+          change needed. A cell that holds an element (e.g. an icon image) is
+          never treated as a blank, so icon/reference tables are left intact.
+          A column becomes a DROPDOWN if its header/label cell
           ends with a brace list of options, separated by ";" or "|", e.g.
               **Cell Body Layer** {Layer 1;Layer 2/3;Layer 4;Layer 5;Layer 6}
           (";" needs no escaping in a table cell; if you use "|", escape it as \|
@@ -74,7 +76,7 @@
     if (!bodyRows.length) { return; }
     var hasBlank = bodyRows.some(function (tr) {
       return Array.prototype.slice.call(tr.children).some(function (td) {
-        return td.tagName === "TD" && !td.textContent.trim() && !td.querySelector("input, textarea, select");
+        return td.tagName === "TD" && !td.textContent.trim() && !td.querySelector("*");
       });
     });
     if (!hasBlank) { return; }                      // not an answer table
@@ -101,7 +103,7 @@
       var rowCells = [];
       var rowLabel = tr.children[0] ? tr.children[0].textContent.trim() : "";
       Array.prototype.slice.call(tr.children).forEach(function (td, ci) {
-        if (td.tagName !== "TD" || td.textContent.trim() || td.querySelector("input, textarea, select")) {
+        if (td.tagName !== "TD" || td.textContent.trim() || td.querySelector("*")) {
           rowCells.push({ text: td.textContent.trim() });
           return;
         }
