@@ -209,10 +209,7 @@ div.csl-indent {
   <li><a href="#visualizing-neuroanatomy-direction-terms" id="toc-visualizing-neuroanatomy-direction-terms" class="nav-link" data-scroll-target="#visualizing-neuroanatomy-direction-terms">2. Visualizing Neuroanatomy Direction Terms</a></li>
   <li><a href="#layered-organization-of-visual-cortex" id="toc-layered-organization-of-visual-cortex" class="nav-link" data-scroll-target="#layered-organization-of-visual-cortex">3. Layered organization of visual cortex</a></li>
   <li><a href="#visualizing-the-flow-of-information-through-the-visual-cortex" id="toc-visualizing-the-flow-of-information-through-the-visual-cortex" class="nav-link" data-scroll-target="#visualizing-the-flow-of-information-through-the-visual-cortex">4. Visualizing the flow of information through the visual cortex</a></li>
-  </ul></li>
-  <li><a href="#visualizing-the-cortical-information-flow-through-color" id="toc-visualizing-the-cortical-information-flow-through-color" class="nav-link" data-scroll-target="#visualizing-the-cortical-information-flow-through-color">5. Visualizing the cortical information flow through color</a>
-  <ul class="collapse">
-  <li><a href="#sharing-your-neuroglancer-state" id="toc-sharing-your-neuroglancer-state" class="nav-link" data-scroll-target="#sharing-your-neuroglancer-state">Sharing your neuroglancer state</a></li>
+  <li><a href="#visualizing-the-cortical-information-flow-through-color" id="toc-visualizing-the-cortical-information-flow-through-color" class="nav-link" data-scroll-target="#visualizing-the-cortical-information-flow-through-color">5. Visualizing the cortical information flow through color</a></li>
   </ul></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   <li><a href="#works-cited" id="toc-works-cited" class="nav-link" data-scroll-target="#works-cited">Works Cited</a></li>
@@ -829,9 +826,8 @@ Tip
 </table>
 <p><br> <br></p>
 </section>
-</section>
-<section id="visualizing-the-cortical-information-flow-through-color" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-the-cortical-information-flow-through-color">5. Visualizing the cortical information flow through color</h2>
+<section id="visualizing-the-cortical-information-flow-through-color" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-the-cortical-information-flow-through-color">5. Visualizing the cortical information flow through color</h3>
 <p>Now that you have organized neurons by their axonal projection patterns we will make a visual scene that illustrates these different patterns more obviously. You will notice that if you have too many neurons visible at once, the random colors can make it difficult to distinguish what is what. To change this, you will assign a color for each projection pattern (local, cortical-cortical, or cortical-subcortical) and manually recolor each neuron based on your custom color scheme.</p>
 <div class="grid">
 <div class="g-col-6">
@@ -846,8 +842,8 @@ Tip
 </div>
 </div>
 </div>
-<section id="sharing-your-neuroglancer-state" class="level3">
-<h3 class="anchored" data-anchor-id="sharing-your-neuroglancer-state">Sharing your neuroglancer state</h3>
+<section id="sharing-your-neuroglancer-state" class="level4">
+<h4 class="anchored" data-anchor-id="sharing-your-neuroglancer-state">Sharing your neuroglancer state</h4>
 <p>The URL in your browser is a <strong>stateful</strong> url, meaning everything about your neuroglancer view is encoded in that string of text. When you copy it and share it with another person, they see what you see.</p>
 <p>However, because the URL encodes everything it gets very long and cumbersome. Instead, we recommend you use the built in link-shortener. In the upper righthand menu, you will see the following icons:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -864,6 +860,21 @@ Tip
 <p>Share the state from your neuroglancer link, where you have colored the cells according to their projection type.</p>
 </div>
 <div class="answer-box"><label class="answer-prompt" for="af-m1-share">Paste your Neuroglancer Share URL here</label><textarea id="af-m1-share" class="answer-field" data-answer-id="m1-share" rows="2" placeholder="Type your response here…"></textarea></div>
+</section>
+<section id="sharing-a-screenshot" class="level4">
+<h4 class="anchored" data-anchor-id="sharing-a-screenshot">Sharing a screenshot</h4>
+<p>You can also take high resolution snapshots of your neuroglancer scene with the build in screenshot tool:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/neuroglancer_icons_full_tab_screenshot.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 12. Take a snapshot of your scene.</figcaption>
+</figure>
+</div>
+<p>Click the “Camera.” This opens a dialog window with options for downloading, and information about how your image will render. If you select 2x or 4x scale, your image will be a higher resolution than neuroglancer could comfortably render in your interactive browser.</p>
+<div class="task">
+<p>Take a beautiful image of your recolored neurons. Get creative with zoom, angle, <strong>orthographic view</strong>, and even <strong>background color</strong>. See <a href="./neuroglancer-guide/neuroglancer-guide.html">Neuroglancer Guide</a></p>
+</div>
+</section>
 </section>
 </section>
 <section id="additional-resources" class="level2">
