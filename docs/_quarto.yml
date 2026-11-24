@@ -9,6 +9,8 @@ website:
         text: Home
       - href: module-1.ipynb
         text: Module 1
+      - href: module-2.ipynb
+        text: Module 2
     tools: 
       - icon: github
         menu:
