@@ -11,7 +11,11 @@ website:
         text: Module 1
       - href: module-2.ipynb
         text: Module 2
-    tools: 
+      - href: module-3.ipynb
+        text: Module 3
+      - href: neuroglancer-guide/neuroglancer-guide.qmd
+        text: Neuroglancer Guide
+    tools:
       - icon: github
         menu:
           - text: Source Code
@@ -29,6 +33,5 @@ format:
     css: styles.css
     toc: true
     link-external-newwindow: true
-
-
+    include-after-body: resources/answers-widget.html
 
